@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultoria Naval</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        :root {
+            --primary-color: #003366;
+            --secondary-color: #0066cc;
+            --text-color: #333;
+            --light-bg: #f5f5f5;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            height: 50px;
+        }
+
+        .logo img {
+            height: 100%;
+            width: auto;
+        }
+
+        .nav-toggle {
+            display: none;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: flex-end;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Hero Section */
+        /* Hero Section with enhanced overlay */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url('imagem (1).jpeg');
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 1rem;
+            margin-top: 70px;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.8) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 2rem;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 4rem 2rem;
+            background-color: var(--light-bg);
+        }
+
+        .services h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-card i {
+            color: var(--secondary-color);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Image Gallery */
+        .gallery {
+            padding: 4rem 2rem;
+            background-color: white;
+        }
+
+        .gallery h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+
+        .carousel {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-item {
+            min-width: 100%;
+            height: 500px;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 1rem;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        .carousel-button.prev {
+            left: 0;
+        }
+
+        .carousel-button.next {
+            right: 0;
+        }
+
+        /* About Section */
+        .about {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .social-icons {
+            margin-top: 1rem;
+        }
+
+        .social-icons i {
+            font-size: 1.5rem;
+            margin: 0 1rem;
+            cursor: pointer;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+                background: none;
+                border: none;
+                color: white;
+                font-size: 1.5rem;
+                cursor: pointer;
+            }
+
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: var(--primary-color);
+                padding: 1rem;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .carousel-item {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.jpeg" alt="Logo da Empresa">
+        </div>
+        <button class="nav-toggle">
+            <i class="fas fa-bars"></i>
+        </button>
+        <nav>
+            <ul>
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#galeria">Galeria</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1>Consultoria Naval Especializada</h1>
+            <p>Excelência em operações náuticas e gestão de processos em estaleiros</p>
+        </div>
+    </section>
+
+    <section id="servicos" class="services">
+        <h2>Nossos Serviços</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <i class="fas fa-users"></i>
+                <h3>Treinamento de Equipe</h3>
+                <p>Capacitação completa em segurança, operação de equipamentos e procedimentos náuticos.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-ship"></i>
+                <h3>Logística Operacional</h3>
+                <p>Gestão eficiente de recursos e planejamento detalhado de operações náuticas.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-clipboard-check"></i>
+                <h3>Plano de Docagem</h3>
+                <p>Estruturação completa para docagem segura de embarcações de todos os portes.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-weight-hanging"></i>
+                <h3>Içamento de Embarcações</h3>
+                <p>Procedimentos seguros e eficientes para movimentação vertical de embarcações.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="galeria" class="gallery">
+        <h2>Galeria de Serviços</h2>
+        <div class="carousel">
+            <button class="carousel-button prev">❮</button>
+            <div class="carousel-inner">
+                <div class="carousel-item">
+                    <img src="imagem (1).jpeg" alt="Serviço 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="imagem (2).jpeg" alt="Serviço 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="imagem (3).jpeg" alt="Serviço 3">
+                </div>
+                <div class="carousel-item">
+                    <img src="imagem (4).jpeg" alt="Serviço 4">
+                </div>
+                <div class="carousel-item">
+                    <img src="imagem (5).jpeg" alt="Serviço 5">
+                </div>
+                <div class="carousel-item">
+                    <img src="imagem (6).jpeg" alt="Serviço 6">
+                </div>
+                <div class="carousel-item">
+                    <img src="imagem (7).jpeg" alt="Serviço 7">
+                </div>
+                <div class="carousel-item">
+                    <img src="imagem (8).jpeg" alt="Serviço 8">
+                </div>
+                <div class="carousel-item">
+                    <img src="imagem (9).jpeg" alt="Serviço 9">
+                </div>
+                <div class="carousel-item">
+                    <img src="imagem (10).jpeg" alt="Serviço 10">
+                </div>
+                <div class="carousel-item">
+                    <img src="imagem (11).jpeg" alt="Serviço 11">
+                </div>
+                <div class="carousel-item">
+                    <img src="imagem (12).jpeg" alt="Serviço 12">
+                </div>
+                <div class="carousel-item">
+                    <img src="imagem (13).jpeg" alt="Serviço 13">
+                </div>
+                <div class="carousel-item">
+                    <img src="imagem (14).jpeg" alt="Serviço 14">
+                </div>
+                <div class="carousel-item">
+                    <img src="imagem (15).jpeg" alt="Serviço 15">
+                </div>
+                <div class="carousel-item">
+                    <img src="imagem (16).jpeg" alt="Serviço 16">
+                </div>
+                <div class="carousel-item">
+                    <img src="imagem (17).jpeg" alt="Serviço 17">
+                </div>
+                <div class="carousel-item">
+                    <img src="imagem (18).jpeg" alt="Serviço 18">
+                </div>
+                <div class="carousel-item">
+                    <img src="imagem (19).jpeg" alt="Serviço 19">
+                </div>
+                <div class="carousel-item">
+                    <img src="imagem (20).jpeg" alt="Serviço 20">
+                </div>
+                <div class="carousel-item">
+                    <img src="imagem (21).jpeg" alt="Serviço 21">
+                </div>
+            </div>
+            <button class="carousel-button next">❯</button>
+        </div>
+    </section>
+
+    <section id="sobre" class="about">
+        <h2>Sobre Nós</h2>
+        <p>Nossa expertise foi desenvolvida através de anos de experiência prática no setor naval, combinando conhecimentos da área metalúrgica com as melhores práticas do setor náutico. Desenvolvemos processos únicos e eficientes para a docagem de embarcações de grande porte, esporte e recreio.</p>
+    </section>
+
+    <footer id="contato">
+        <p>Entre em contato conosco para mais informações</p>
+        <div class="social-icons">
+            <i class="fab fa-whatsapp"></i>
+            <i class="fab fa-linkedin"></i>
+            <i class="fab fa-facebook"></i>
+        </div>
+    </footer>
+
+    <script>
+        // Menu toggle for mobile
+        document.querySelector('.nav-toggle').addEventListener('click', function() {
+            document.querySelector('nav ul').classList.toggle('active');
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.querySelector('nav ul').classList.remove('active');
+            });
+        });
+
+        // Carousel functionality
+        const carousel = document.querySelector('.carousel-inner');
+        const items = document.querySelectorAll('.carousel-item');
+        const prevButton = document.querySelector('.carousel-button.prev');
+        const nextButton = document.querySelector('.carousel-button.next');
+        let currentIndex = 0;
+
+        function updateCarousel() {
+            carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        prevButton.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + items.length) % items.length;
+            updateCarousel();
+        });
+
+        nextButton.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % items.length;
+            updateCarousel();
+        });
+
+        // Auto advance carousel
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % items.length;
+            updateCarousel();
+        }, 5000);
+    </script>
+</body>
+</html>
